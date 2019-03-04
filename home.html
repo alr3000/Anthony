@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en-US" dir="ltr">
+<head>
+	<link rel="stylesheet" href="src/css/swipebox.css">
+	<script src="src/js/jquery-3.1.1.min.js"></script>
+	<script src="src/js/jquery.swipebox.js"></script>
+
+	<!-- list of slide img srcs to be embedded -->
+	<script>
+
+// dropbox images urls must end with "raw=1" to be embedded
+var slideUrls = [
+	"https://www.dropbox.com/s/oxpavlc3aegrr3a/0903p116tk-green-beans-l.jpg?raw=1",
+	"https://www.dropbox.com/s/oxpavlc3aegrr3a/0903p116tk-green-beans-l.jpg?raw=1",
+	"https://www.dropbox.com/s/oxpavlc3aegrr3a/0903p116tk-green-beans-l.jpg?raw=1"
+];
+	</script>
+
+
+	<!-- style navigation and eliminate close button -->
+	<style>
+
+	#swipebox-close, #swipebox-top-bar {
+		height: 0px;
+	}
+
+	#swipebox-bottom-bar {
+		opacity: 0.5;
+	}
+	</style>
+
+</head>
+<body>
+	<!-- start button is necessary user interaction to begin full screen for rotation -->
+	<button id="button">start</button>
+
+
+	<!-- on click start, go full screen, rotate, begin slides -->
+	<script type="text/javascript"> 
+
+$("body").ready(function() {
+
+
+	document.getElementById("button").addEventListener("click", function() {
+
+
+
+ 	// experimental feature requires webkit prefix in chrome, browser setting in Firefox
+	// must request user-interaction for fullscreen before changing orientation
+	// this might change with kiosk mode
+
+  		document.documentElement.webkitRequestFullScreen();
+  		screen.orientation.lock("portrait-primary");
+
+
+
+	// start swipebox after screen in in final form as it saves width/height
+
+		$.swipebox( 
+			slideUrls.map ( function (url) { return { href: url } } ),
+			{
+			// options			
+			}
+		);
+
+
+
+ 	}, false); // on click start
+
+
+}); // on ready
+
+
+
+</script>
+</body>
+
